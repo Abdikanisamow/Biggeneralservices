@@ -1,0 +1,380 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+}
+
+body {
+  font-family: 'Baloo Bhai 2', cursive;
+  background-color: #f4f4f4;
+  color: #333;
+  padding-top: 80px; /* Add padding to prevent content from hiding behind fixed header */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+:root {
+  --primary: #014e78;
+  --secondary: #629677;
+}
+
+header {
+  background: transparent; /* Completely transparent background */
+  color: #fff;
+  padding: 15px 0;
+  position: fixed; /* Fixed position to stay on top when scrolling */
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* Higher z-index to stay above all content */
+  transition: all 0.3s ease; /* Smooth transition for any state changes */
+}
+
+/* Transparent nav when on home page */
+header.transparent {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: none;
+}
+
+/* Nav with background when scrolled */
+header.scrolled {
+  background: rgba(0, 0, 0, 0.15); /* Much lighter black transparent background */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 20px 0; /* Increased padding to fully cover logo and text */
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-img {
+  height: 50px;
+}
+
+/* New Navigation Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: flex-end; /* Align items to the right without spacing */
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0; /* Remove gaps between items */
+}
+
+.nav-item {
+  margin: 0; /* Remove margin between items */
+}
+
+.nav-link {
+  font-size: 1rem; /* Keep original font size */
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 0.8rem; /* Increased padding for more space between items */
+}
+
+.nav-link:hover {
+  color: var(--secondary);
+  transform: translateY(-2px);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--secondary);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 3px 0;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+/* Hamburger Animation */
+.hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger.active .bar:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Hero Section with Transparent Overlay */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  margin-top: -80px; /* Offset the body padding for full-height hero */
+  padding-top: 80px; /* Add padding to account for fixed header */
+}
+
+/* Background video */
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2; /* stay behind overlay */
+  object-position: center center;
+}
+
+/* Mobile-specific video adjustments */
+@media (max-width: 768px) {
+  .bg-video {
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .hero {
+    height: 100vh;
+    min-height: 500px;
+  }
+  
+  .hero-text h2 {
+    font-size: 36px;
+  }
+  
+  .hero-text p {
+    font-size: 18px;
+  }
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6); /* adjust darkness */
+  z-index: -1;
+}
+
+/* Hero Text */
+.hero-text {
+  position: relative;
+  z-index: 1; /* sits above overlay */
+  padding: 20px;
+}
+
+.hero-text h2 {
+  font-size: 60px;
+  margin-bottom: 10px;
+}
+
+.hero-text p {
+  font-size: 22px;
+}
+
+/* Sections */
+.section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 36px;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  width: 300px;
+  border-radius: 8px;
+  border-left: 6px solid var(--primary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: relative;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.hover-list {
+  display: none;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.card:hover .hover-list {
+  display: block;
+}
+
+.hover-list li {
+  font-size: 14px;
+  padding: 2px 0;
+}
+
+.dark {
+  background: var(--secondary);
+  color: #fff;
+}
+
+.section-text {
+  max-width: 700px;
+  margin: auto;
+}
+
+/* Contact Icons */
+.contact-icons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.contact-icon {
+  font-size: 40px;
+  transition: transform 0.3s ease;
+}
+
+.contact-icon:hover {
+  transform: scale(1.2);
+}
+
+/* Brand Colors */
+.contact-icon.whatsapp { color: #25D366; }
+.contact-icon.email { color: #D44638; }
+.contact-icon.facebook { color: #1877F2; }
+.contact-icon.youtube { color: #FF0000; }
+
+
+/* Footer */
+footer {
+  background: #111;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* Mobile Responsive Menu */
+@media (max-width: 768px) {
+  body {
+    padding-top: 80px;
+  }
+  
+  header {
+    padding: 15px 0;
+  }
+  
+  header.scrolled {
+    padding: 20px 0;
+  }
+  
+  .hero {
+    margin-top: -80px;
+    padding-top: 80px;
+  }
+  
+  .nav-menu {
+    position: fixed;
+    right: -50%;
+    top: 80px;
+    flex-direction: column;
+    background: var(--secondary); /* Use secondary color background */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    width: 50%;
+    height: 50vh; /* Half of viewport height */
+    text-align: center;
+    transition: 0.3s ease;
+    box-shadow: -10px 0 27px rgba(0, 0, 0, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem 0;
+    overflow-y: auto;
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-item {
+    margin: 1.5rem 0;
+  }
+  
+  .nav-link {
+    font-size: 1.2rem;
+    padding: 1rem 0;
+    display: block;
+  }
+  
+  .nav-link:hover {
+    transform: scale(1.1);
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-text h2 {
+    font-size: 36px;
+  }
+}
